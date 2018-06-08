@@ -34,10 +34,15 @@ namespace DemoApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+            StartServices();
+            Push.PushNotificationReceived += Push_PushNotificationReceived;
+        }
+
+
+        private void StartServices()
+        {
             AppCenter.Start("da9b4f58-c1b0-4fed-bf96-eb7fa1edb13b", typeof(Analytics));
             AppCenter.Start("da9b4f58-c1b0-4fed-bf96-eb7fa1edb13b", typeof(Push));
-
-            Push.PushNotificationReceived += Push_PushNotificationReceived;
         }
 
 
@@ -48,8 +53,9 @@ namespace DemoApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            StartServices();
             Push.CheckLaunchedFromNotification(e);
-            
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
