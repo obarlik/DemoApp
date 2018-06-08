@@ -109,6 +109,8 @@ namespace DemoApp
                 }
             }
 
+            Analytics.TrackEvent(summary);
+
             // Send the notification summary to debug output
             System.Diagnostics.Debug.WriteLine(summary);
         }
